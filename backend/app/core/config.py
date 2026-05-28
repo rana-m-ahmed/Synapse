@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     GROQ_MODEL_NAME: str = "llama-3.3-70b-versatile"
 
     # ── Embedding Model ──────────────────────────────────────────────────
-    EMBEDDING_MODEL_NAME: str = "all-MiniLM-L6-v2"
+    EMBEDDING_MODEL_NAME: str = "paraphrase-multilingual-MiniLM-L12-v2"
     EMBEDDING_DIMENSION: int = 384
 
     # ── RAG Pipeline ─────────────────────────────────────────────────────

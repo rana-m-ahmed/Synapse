@@ -107,6 +107,81 @@ class VectorRepository:
         )
         return results
 
+    def hybrid_search(
+        self,
+        agent_id: str,
+        query_text: str,
+        query_embedding: list[float],
+        limit: int = 5,
+    ) -> list[dict]:
+        """
+        Perform hybrid similarity search using the match_chunks_hybrid RPC function.
+        Results are scoped to the specified agent's knowledge base.
+        """
+        response = self._client.rpc(
+            "match_chunks_hybrid",
+            {
+                "query_text": query_text,
+                "query_embedding": query_embedding,
+                "target_agent_id": agent_id,
+                "match_count": limit,
+            },
+        ).execute()
+
+        results = response.data or []
+        logger.info(
+            f"Hybrid search for agent {agent_id}: "
+            f"{len(results)} results retrieved"
+        )
+        return results
+
+    def check_semantic_cache(
+        self,
+        agent_id: str,
+        query_embedding: list[float],
+        threshold: float = 0.95,
+    ) -> Optional[dict]:
+        """
+        Check if a highly similar query already exists in the semantic cache.
+        """
+        response = self._client.rpc(
+            "check_semantic_cache",
+            {
+                "query_vec": query_embedding,
+                "target_agent_id": agent_id,
+                "match_threshold": threshold,
+            },
+        ).execute()
+
+        results = response.data or []
+        if results:
+            logger.info(f"Semantic cache hit for agent {agent_id} (similarity: {results[0].get('similarity', 'N/A')})")
+            return results[0]
+        return None
+
+    def save_to_semantic_cache(
+        self,
+        agent_id: str,
+        query_embedding: list[float],
+        standalone_query: str,
+        response_text: str,
+        sources: list[dict],
+    ) -> None:
+        """
+        Save an AI response to the semantic cache for future exact/similar queries.
+        """
+        try:
+            self._client.table("semantic_cache").insert({
+                "agent_id": agent_id,
+                "query_embedding": query_embedding,
+                "standalone_query": standalone_query,
+                "response": response_text,
+                "sources": sources,
+            }).execute()
+            logger.info(f"Saved response to semantic cache for agent {agent_id}")
+        except Exception as e:
+            logger.error(f"Failed to save to semantic cache: {e}")
+
     def delete_by_document(self, document_id: str) -> int:
         """
         Delete all chunks for a specific document.

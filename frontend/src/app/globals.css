@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-sand-bg: #F9F9F8;
-  --color-charcoal-text: #111111;
-  --color-electric-tangerine: #FF5C00;
-  --color-sage-green: #82947E;
-  --color-muted-terracotta: #C05C46;
-  --color-surface: #f9f9f8;
-  --color-surface-container: #eeeeed;
-  --color-surface-container-lowest: #ffffff;
-  --color-on-surface-variant: #444748;
-  --color-border-subtle: #E5E5E3;
+  /* Deep Space Dark Theme */
+  --color-sand-bg: #0A0A0A; /* Sleek black background */
+  --color-charcoal-text: #FFFFFF; /* Pure white text */
+  --color-electric-tangerine: #FF5C00; /* Primary brand color */
+  --color-sage-green: #00FFA3; /* Neon active/success state */
+  --color-muted-terracotta: #7C3AED; /* Neon purple/blue accent */
+  --color-surface: #121212; /* Slightly elevated background */
+  --color-surface-container: #1A1A1A; /* Cards & containers */
+  --color-surface-container-lowest: #0F0F0F; /* Deepest elevation */
+  --color-on-surface-variant: #A1A1AA; /* Muted text (zinc-400) */
+  --color-border-subtle: #27272A; /* Subtle borders (zinc-800) */
   --color-error: #ef4444;
 
   --font-label-sm: "Hanken Grotesk", sans-serif;
@@ -68,4 +69,9 @@ body {
     height: 100vh;
     display: flex;
     align-items: center;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }

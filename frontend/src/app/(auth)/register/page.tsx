@@ -79,7 +79,16 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-sand-bg relative px-margin-mobile">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-sand-bg relative px-margin-mobile">
+      <div className="w-full max-w-md mb-6 flex items-center justify-between">
+        <Link href="/" className="font-headline-md text-[24px] font-medium tracking-tighter text-charcoal-text hover:text-electric-tangerine transition-colors">
+          Synapse
+        </Link>
+        <Link href="/" className="inline-flex items-center gap-2 text-on-surface-variant hover:text-charcoal-text font-label-mono text-[10px] uppercase tracking-widest transition-colors">
+          <span className="material-symbols-outlined text-[14px]">arrow_back</span>
+          Home
+        </Link>
+      </div>
       <Suspense fallback={<div className="font-label-mono text-[12px]">Loading...</div>}>
         <RegisterForm />
       </Suspense>

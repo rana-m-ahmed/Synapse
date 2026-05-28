@@ -34,14 +34,14 @@ export default function AgentLayout({
         </h1>
         
         {/* Navigation Tabs */}
-        <div className="flex border-b border-border-subtle">
+        <div className="flex border-b border-border-subtle overflow-x-auto scrollbar-hide -mx-2 px-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {tabs.map((tab) => {
             const isActive = pathname === tab.href;
             return (
               <Link
                 key={tab.name}
                 href={tab.href}
-                className={`px-6 py-3 font-label-mono text-[12px] uppercase tracking-widest transition-colors relative ${
+                className={`px-4 md:px-6 py-3 font-label-mono text-[11px] md:text-[12px] uppercase tracking-widest transition-colors relative whitespace-nowrap shrink-0 ${
                   isActive ? "text-charcoal-text font-bold" : "text-on-surface-variant hover:text-charcoal-text"
                 }`}
               >

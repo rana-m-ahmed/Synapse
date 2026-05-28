@@ -81,10 +81,10 @@ export default function DashboardOverview() {
 
       {queryError && (
         <div className="mb-8 p-4 bg-error text-sand-bg font-body-md shadow-lg flex items-start gap-3 relative overflow-hidden">
-          <span className="material-symbols-outlined text-[20px] shrink-0 mt-0.5">flag</span>
+          <span className="material-symbols-outlined text-[20px] shrink-0 mt-0.5">error_outline</span>
           <div className="flex flex-col">
             <span className="font-label-mono text-[10px] uppercase tracking-widest text-sand-bg/80 mb-1">Attention Required</span>
-            <span>Failed to initialize telemetry. Connection error.</span>
+            <span>Failed to load agents: {queryError instanceof Error ? queryError.message : "Connection error"}</span>
           </div>
         </div>
       )}

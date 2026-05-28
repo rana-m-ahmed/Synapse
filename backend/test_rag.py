@@ -23,11 +23,12 @@ async def run_tests():
     print(f"Starting test session: {session_id}")
     
     test_prompts = [
-        "Hi there!", 
-        "What is the CA project?", 
-        "Who made it?", 
-        "What is the capital of France?", 
-        "Thanks for the info!"
+        "Hi there!", # Test greeting (bypass search)
+        "What is the CA project?", # First question (bypass reformulation)
+        "Who made it?", # Follow-up question (tests history reformulation)
+        "What is the CA project?", # Exact same question (tests Semantic Cache hit)
+        "What is the capital of France?", # Out of domain (tests fallback)
+        "Can you explain the Systolic Array Visualizer?", # Keyword match (tests Hybrid search)
     ]
     
     for prompt in test_prompts:

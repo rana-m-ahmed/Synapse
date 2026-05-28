@@ -22,7 +22,8 @@ export default function KnowledgeBase({ params }: { params: Promise<{ agentId: s
     queryFn: async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) throw new Error("No session");
-      const res = await fetchApi(`/api/v1/documents/?agent_id=${agentId}`, {}, session.access_token);
+      // Add cache: 'no-store' to force Next.js / browser to always fetch fresh data
+      const res = await fetchApi(`/api/v1/documents/?agent_id=${agentId}`, { cache: "no-store" }, session.access_token);
       return res.documents || [];
     },
     refetchInterval: (query) => {
@@ -58,7 +59,11 @@ export default function KnowledgeBase({ params }: { params: Promise<{ agentId: s
       }
       return res.json();
     },
-    onSuccess: () => {
+    onSuccess: (newDoc) => {
+      // Optimistically add the new document to the UI immediately to handle any network latency
+      queryClient.setQueryData(["documents", agentId], (oldDocs: any) => {
+        return [newDoc, ...(oldDocs || [])];
+      });
       queryClient.invalidateQueries({ queryKey: ["documents", agentId] });
       queryClient.invalidateQueries({ queryKey: ["agents"] });
     },
@@ -77,7 +82,11 @@ export default function KnowledgeBase({ params }: { params: Promise<{ agentId: s
         })
       }, session.access_token);
     },
-    onSuccess: () => {
+    onSuccess: (newDoc) => {
+      // Optimistically add the new document to the UI immediately to handle any network latency
+      queryClient.setQueryData(["documents", agentId], (oldDocs: any) => {
+        return [newDoc, ...(oldDocs || [])];
+      });
       queryClient.invalidateQueries({ queryKey: ["documents", agentId] });
       queryClient.invalidateQueries({ queryKey: ["agents"] });
       setTextContent("");
@@ -235,16 +244,32 @@ export default function KnowledgeBase({ params }: { params: Promise<{ agentId: s
           {activeTab === "file" && (
             <div 
               {...getRootProps()} 
-              className={`border-2 border-dashed p-8 text-center cursor-pointer transition-colors duration-300 ${
-                isDragActive ? 'border-sage-green bg-sage-green/5' : 'border-border-subtle hover:border-charcoal-text bg-sand-bg'
+              className={`border-2 border-dashed p-8 text-center transition-all duration-300 ${
+                uploadMutation.isPending 
+                  ? 'opacity-70 pointer-events-none border-electric-tangerine bg-electric-tangerine/5' 
+                  : isDragActive 
+                    ? 'border-sage-green bg-sage-green/5 cursor-pointer scale-[1.02] shadow-lg' 
+                    : 'border-border-subtle hover:border-charcoal-text bg-sand-bg cursor-pointer hover:shadow-sm'
               }`}
             >
               <input {...getInputProps()} />
-              <span className={`material-symbols-outlined text-[40px] mb-4 ${isDragActive ? 'text-sage-green' : 'text-on-surface-variant'}`}>
-                {uploadMutation.isPending ? 'cloud_sync' : 'upload_file'}
-              </span>
+              <div className="flex justify-center mb-4">
+                {uploadMutation.isPending ? (
+                  <motion.span 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                    className="material-symbols-outlined text-[40px] text-electric-tangerine"
+                  >
+                    autorenew
+                  </motion.span>
+                ) : (
+                  <span className={`material-symbols-outlined text-[40px] transition-colors ${isDragActive ? 'text-sage-green' : 'text-on-surface-variant'}`}>
+                    upload_file
+                  </span>
+                )}
+              </div>
               <p className="font-body-md text-charcoal-text mb-2">
-                {uploadMutation.isPending ? 'Transmitting data...' : isDragActive ? 'Drop file to ingest' : 'Drag & drop a document here'}
+                {uploadMutation.isPending ? 'Transmitting and processing data...' : isDragActive ? 'Drop file to ingest' : 'Drag & drop a document here'}
               </p>
               <p className="font-label-mono text-[10px] text-on-surface-variant uppercase tracking-widest">
                 Supported: PDF, TXT, DOCX, CSV, XLSX
