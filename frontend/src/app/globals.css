@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-sand-bg: #F9F9F8;
+  --color-charcoal-text: #111111;
+  --color-electric-tangerine: #FF5C00;
+  --color-sage-green: #82947E;
+  --color-muted-terracotta: #C05C46;
+  --color-surface: #f9f9f8;
+  --color-surface-container: #eeeeed;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-surface-variant: #444748;
+  --color-border-subtle: #E5E5E3;
+  --color-error: #ef4444;
+
+  --font-label-sm: "Hanken Grotesk", sans-serif;
+  --font-label-mono: "Space Mono", monospace;
+  --font-display-xl: "Bodoni Moda", serif;
+  --font-headline-lg: "Bodoni Moda", serif;
+  --font-display-xl-mobile: "Bodoni Moda", serif;
+  --font-body-lg: "Hanken Grotesk", sans-serif;
+  --font-headline-md: "Bodoni Moda", serif;
+  --font-body-md: "Hanken Grotesk", sans-serif;
+
+  --spacing-stack-lg: 4rem;
+  --spacing-stack-md: 2rem;
+  --spacing-margin-mobile: 1.5rem;
+  --spacing-stack-xl: 8rem;
+  --spacing-margin-page: 4rem;
+  --spacing-gutter: 2rem;
+}
+
+body {
+  background-color: var(--color-sand-bg);
+  color: var(--color-charcoal-text);
+  font-family: var(--font-body-md);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.magnetic {
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.spring-ease {
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.kinetic-element {
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stack-panel {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}

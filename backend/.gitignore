@@ -1,0 +1,45 @@
+# =============================================================================
+# Synapse Backend — Git Ignore
+# =============================================================================
+
+# --- Environment ---
+.env
+.env.local
+.env.production
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# --- Virtual Environment ---
+venv/
+.venv/
+env/
+
+# --- Testing ---
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Model Cache ---
+# sentence-transformers downloads models here
+.cache/
+models/
