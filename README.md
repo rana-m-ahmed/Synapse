@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/rana-m-ahmed/Synapse/main/frontend/public/logo.png" alt="Synapse Logo" width="120" style="border-radius: 20px; margin-bottom: 20px;" onerror="this.style.display='none'">
   
   # 🧠 Synapse
   
