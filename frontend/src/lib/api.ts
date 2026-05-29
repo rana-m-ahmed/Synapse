@@ -25,7 +25,7 @@ export async function fetchApi(
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.detail || `API error: ${response.status}`);
+    throw new Error(errorData.error || errorData.detail || `API error: ${response.status}`);
   }
 
   return response.json();

@@ -74,8 +74,12 @@ for (let i = 0; i < PARTICLES.length; i++) {
 export function HeroSection() {
   return (
     <section className="min-h-[calc(100vh-80px)] flex flex-col justify-center px-margin-mobile md:px-margin-page py-12 md:py-stack-lg max-w-screen-2xl mx-auto relative overflow-hidden">
-      {/* Background dot grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none -z-10"></div>
+      {/* Animated Background dot grid */}
+      <motion.div 
+        animate={{ backgroundPosition: ["0px 0px", "100px 100px"] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none -z-10"
+      ></motion.div>
       {/* Ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,92,0,0.08)_0%,transparent_70%)] pointer-events-none -z-10"></div>
       
@@ -86,18 +90,24 @@ export function HeroSection() {
           transition={{ duration: 1, ease: [0.2, 0.8, 0.2, 1] }}
           className="md:col-span-7 flex flex-col justify-center relative pt-8 md:pt-0"
         >
-          <h1 className="font-display-xl-mobile md:font-display-xl text-[40px] sm:text-[48px] md:text-[72px] lg:text-[84px] font-bold text-charcoal-text leading-[1.05] md:leading-[1.05] mb-6 md:mb-stack-md relative">
-            Build AI Agents<br />
-            That Actually<br className="hidden md:block" />
-            <span className="italic text-muted-terracotta relative inline-block">
-              Understand.
-              <motion.span 
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-1 bg-electric-tangerine opacity-50 origin-left"
-              ></motion.span>
-            </span>
+          <h1 className="font-display-xl-mobile md:font-display-xl text-[40px] sm:text-[48px] md:text-[72px] lg:text-[84px] font-bold text-charcoal-text leading-[1.05] md:leading-[1.05] mb-6 md:mb-stack-md relative flex flex-col">
+            <div className="overflow-hidden">
+              <motion.span initial={{ y: 100 }} animate={{ y: 0 }} transition={{ duration: 0.8, type: "spring", bounce: 0.2 }} className="block">Build AI Agents</motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span initial={{ y: 100 }} animate={{ y: 0 }} transition={{ duration: 0.8, delay: 0.1, type: "spring", bounce: 0.2 }} className="block">That Actually</motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span initial={{ y: 100 }} animate={{ y: 0 }} transition={{ duration: 0.8, delay: 0.2, type: "spring", bounce: 0.2 }} className="block italic text-muted-terracotta relative inline-block">
+                Understand.
+                <motion.span 
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                  className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-1 bg-electric-tangerine opacity-50 origin-left"
+                ></motion.span>
+              </motion.span>
+            </div>
           </h1>
           <p className="font-body-lg text-[16px] md:text-[18px] text-on-surface-variant max-w-xl mb-6 md:mb-stack-md border-l-2 border-electric-tangerine pl-6">
             The autonomous SaaS chatbot platform. Train custom AI agents on your data in minutes, 

@@ -9,6 +9,7 @@ import { Suspense } from "react";
 function LoginForm() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
+  const message = searchParams.get("message");
 
   return (
     <div className="w-full max-w-md bg-surface-container-lowest border border-border-subtle p-8 md:p-12 shadow-[0_20px_50px_rgba(17,17,17,0.04)] z-10 relative">
@@ -32,6 +33,17 @@ function LoginForm() {
         </div>
       )}
 
+      {message && (
+        <div className="mb-6 p-4 bg-sage-green text-surface-container-lowest font-body-md shadow-lg flex items-start gap-3 relative overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="absolute top-0 right-0 w-16 h-16 bg-black/10 rounded-full -translate-y-8 translate-x-8 pointer-events-none"></div>
+          <span className="material-symbols-outlined text-[20px] shrink-0 mt-0.5">check_circle</span>
+          <div className="flex flex-col">
+            <span className="font-label-mono text-[10px] uppercase tracking-widest text-surface-container-lowest/80 mb-1">Success</span>
+            <span>{message}</span>
+          </div>
+        </div>
+      )}
+
       <form action={login} className="space-y-6 flex flex-col">
         <div className="space-y-2">
           <label className="font-label-mono text-[10px] uppercase tracking-widest text-charcoal-text">
@@ -47,9 +59,14 @@ function LoginForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="font-label-mono text-[10px] uppercase tracking-widest text-charcoal-text">
-            Password
-          </label>
+          <div className="flex justify-between items-center">
+            <label className="font-label-mono text-[10px] uppercase tracking-widest text-charcoal-text">
+              Password
+            </label>
+            <Link href="/forgot-password" className="font-label-mono text-[10px] text-on-surface-variant hover:text-electric-tangerine transition-colors">
+              Forgot Password?
+            </Link>
+          </div>
           <input 
             name="password"
             type="password" 

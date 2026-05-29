@@ -48,7 +48,12 @@ class AgentService:
         )
 
     def create_agent(self, user_id: str, data: AgentCreate) -> AgentResponse:
-        """Create a new agent for the authenticated user."""
+        """Create a new agent for the authenticated user, enforcing limits."""
+        # Enforce business limit: Max 2 agents per user
+        current_agents = self._repo.list_by_user(user_id)
+        if len(current_agents) >= 2:
+            raise ForbiddenError("You have a limit of only two agents on the free plan.")
+
         agent = self._repo.create(user_id, data.model_dump())
         return self._to_response(agent)
 

@@ -68,6 +68,12 @@ class DocumentService:
             updated_at=doc["updated_at"],
         )
 
+    def _verify_document_limit(self, agent_id: str) -> None:
+        """Raise ForbiddenError if the agent has reached the maximum allowed documents."""
+        count = self._agent_service._repo.count_documents(agent_id)
+        if count >= 5:
+            raise ForbiddenError("You have a limit of only five documents per agent on the free plan.")
+
     # ── File Upload ───────────────────────────────────────────────────────
 
     async def upload_document(
@@ -97,8 +103,9 @@ class DocumentService:
         Returns:
             DocumentResponse with initial status.
         """
-        # Step 1: Verify agent ownership
+        # Step 1: Verify agent ownership and quota
         self._agent_service.get_agent(user_id, agent_id)
+        self._verify_document_limit(agent_id)
 
         # Step 2: Determine file type
         extension = "." + file_name.rsplit(".", 1)[-1].lower() if "." in file_name else ""
@@ -159,8 +166,9 @@ class DocumentService:
         Add a direct text paste as a knowledge source.
         No file storage needed — the text is processed directly.
         """
-        # Verify agent ownership
+        # Verify agent ownership and quota
         self._agent_service.get_agent(user_id, agent_id)
+        self._verify_document_limit(agent_id)
 
         # Create document record
         doc = self._doc_repo.create({
@@ -193,8 +201,9 @@ class DocumentService:
         Add a URL as a knowledge source.
         The URL content is fetched and processed by the URL parser.
         """
-        # Verify agent ownership
+        # Verify agent ownership and quota
         self._agent_service.get_agent(user_id, agent_id)
+        self._verify_document_limit(agent_id)
 
         # Create document record
         doc = self._doc_repo.create({

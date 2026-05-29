@@ -217,8 +217,13 @@ export default function DashboardOverview() {
                 </div>
 
                 {createMutation.error && (
-                  <div className="text-error font-label-mono text-[10px] uppercase tracking-widest">
-                    Error: {(createMutation.error as Error).message}
+                  <div className="mb-4 p-4 bg-error text-sand-bg font-body-md shadow-lg flex items-start gap-3 relative overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8 pointer-events-none"></div>
+                    <span className="material-symbols-outlined text-[20px] shrink-0 mt-0.5">flag</span>
+                    <div className="flex flex-col text-left">
+                      <span className="font-label-mono text-[10px] uppercase tracking-widest text-sand-bg/80 mb-1">Attention Required</span>
+                      <span className="text-[14px]">{(createMutation.error as Error).message}</span>
+                    </div>
                   </div>
                 )}
 

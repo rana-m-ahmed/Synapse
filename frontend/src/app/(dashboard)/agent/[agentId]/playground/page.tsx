@@ -59,7 +59,7 @@ export default function Playground({ params }: { params: Promise<{ agentId: stri
 
       const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       
-      const response = await fetch(`${baseUrl}/api/v1/chat/`, {
+      const response = await fetch(`${baseUrl}/api/v1/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

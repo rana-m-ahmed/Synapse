@@ -25,7 +25,7 @@ from app.services.rag_service import RagService
 router = APIRouter()
 
 
-@router.post("/")
+@router.post("")
 async def chat(
     data: ChatRequest,
     user: dict = Depends(get_current_user),

@@ -59,6 +59,19 @@ function RegisterForm() {
           />
         </div>
 
+        <div className="space-y-2">
+          <label className="font-label-mono text-[10px] uppercase tracking-widest text-charcoal-text">
+            Confirm Password
+          </label>
+          <input 
+            name="confirmPassword"
+            type="password" 
+            required
+            className="w-full bg-sand-bg border border-border-subtle p-4 font-body-md text-charcoal-text focus:outline-none focus:border-sage-green transition-colors"
+            placeholder="••••••••"
+          />
+        </div>
+
         <MagneticButton type="submit" className="w-full bg-charcoal-text text-sand-bg font-label-mono text-[12px] py-4 border border-charcoal-text hover:bg-transparent hover:text-charcoal-text transition-colors duration-300 mt-4 flex justify-center items-center">
           Create Account
           <span className="material-symbols-outlined ml-2 text-[16px]">arrow_forward</span>

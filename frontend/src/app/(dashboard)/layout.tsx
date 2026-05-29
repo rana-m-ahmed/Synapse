@@ -24,6 +24,7 @@ export default function DashboardLayout({
 
   const navLinks = [
     { name: "Overview", href: "/dashboard", icon: "dashboard" },
+    { name: "Security", href: "/settings/security", icon: "lock" },
   ];
 
   const SidebarContent = (
