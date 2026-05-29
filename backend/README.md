@@ -1,3 +1,13 @@
+---
+title: Synapse Backend
+emoji: ⚡
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 8080
+pinned: false
+---
+
 # Synapse Backend
 
 FastAPI backend for the Synapse AI Customer Support Agent platform.
