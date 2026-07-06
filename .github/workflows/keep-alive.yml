@@ -10,6 +10,6 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Hugging Face Space
+      - name: Ping Hugging Face Space Health Endpoint
         run: |
-          curl -s -L -o /dev/null -w "%{http_code}" https://huggingface.co/spaces/rana-m-ahmed/synapse-backend
+          curl -s -L -o /dev/null -w "%{http_code}" https://rana-m-ahmed-synapse-backend.hf.space/health
