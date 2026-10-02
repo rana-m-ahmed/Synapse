@@ -193,7 +193,7 @@ export function PlatformSection() {
                    <span className="material-symbols-outlined text-[14px]">science</span>
                    Live Playground
                  </span>
-                 <span className="font-label-mono text-[9px] text-on-surface-variant">llama-3.3-70b</span>
+                 <span className="font-label-mono text-[9px] text-on-surface-variant">gpt-oss-120b</span>
               </div>
               <div className="flex-1 p-4 flex flex-col justify-end space-y-3 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:16px_16px] min-h-[150px]">
                 <motion.div 
