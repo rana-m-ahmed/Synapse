@@ -18,7 +18,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.core.config import get_settings
+from app.core.config import get_settings, GROQ_LLM_MODEL
 from app.core.exceptions import register_exception_handlers
 
 # Configure logging
@@ -53,7 +53,7 @@ async def lifespan(app: FastAPI):
     logger.info("  SYNAPSE BACKEND — Starting up")
     logger.info("=" * 60)
     logger.info(f"  Environment   : {settings.ENVIRONMENT}")
-    logger.info(f"  LLM Model     : {settings.GROQ_MODEL_NAME}")
+    logger.info(f"  LLM Model     : {GROQ_LLM_MODEL}")
     logger.info(f"  Embed Model   : {settings.EMBEDDING_MODEL_NAME}")
     logger.info(f"  Embed Dim     : {settings.EMBEDDING_DIMENSION}")
     logger.info(f"  Chunk Size    : {settings.CHUNK_SIZE}")

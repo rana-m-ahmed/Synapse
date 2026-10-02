@@ -14,6 +14,10 @@ Usage:
 from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# ── Hardcoded LLM Model ─────────────────────────────────────────────────
+# Pinned to prevent stale env vars from silently using a deprecated model.
+# Update this constant (and only this) when migrating to a new model.
+GROQ_LLM_MODEL = "openai/gpt-oss-120b"
 
 class Settings(BaseSettings):
     """
@@ -35,7 +39,8 @@ class Settings(BaseSettings):
 
     # ── Groq (LLM Provider) ──────────────────────────────────────────────
     GROQ_API_KEY: str
-    GROQ_MODEL_NAME: str = "openai/gpt-oss-120b"
+    # NOTE: Model name is hardcoded as GROQ_LLM_MODEL in this module
+    # to prevent stale env vars from pointing to a deprecated model.
 
     # ── Embedding Model ──────────────────────────────────────────────────
     EMBEDDING_MODEL_NAME: str = "paraphrase-multilingual-MiniLM-L12-v2"

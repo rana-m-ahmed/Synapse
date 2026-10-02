@@ -25,7 +25,7 @@ from typing import AsyncGenerator, Optional
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_groq import ChatGroq
 
-from app.core.config import get_settings
+from app.core.config import get_settings, GROQ_LLM_MODEL
 from app.core.exceptions import NotFoundError, RagError
 from app.db.repositories.vector_repo import VectorRepository
 from app.services.conversation_service import ConversationService
@@ -90,7 +90,7 @@ class RagService:
 
         settings = get_settings()
         self._llm = ChatGroq(
-            model=settings.GROQ_MODEL_NAME,
+            model=GROQ_LLM_MODEL,
             api_key=settings.GROQ_API_KEY,
             temperature=0.3,         # Low temperature for factual responses
             max_tokens=1024,

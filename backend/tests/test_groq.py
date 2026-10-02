@@ -6,14 +6,14 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage
-from app.core.config import get_settings
+from app.core.config import get_settings, GROQ_LLM_MODEL
 
 async def test_groq():
     print("Testing Groq LLM API...")
     try:
         settings = get_settings()
         llm = ChatGroq(
-            model=settings.GROQ_MODEL_NAME,
+            model=GROQ_LLM_MODEL,
             api_key=settings.GROQ_API_KEY,
             temperature=0,
             max_tokens=10
