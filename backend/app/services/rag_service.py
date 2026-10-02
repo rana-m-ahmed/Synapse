@@ -12,7 +12,7 @@ Pipeline:
     4. Embed the reformulated query
     5. Vector search for relevant chunks
     6. Build the final prompt with context + history
-    7. Stream response from Groq (LLaMA 3.3)
+    7. Stream response from Groq (GPT-OSS 120B)
     8. Save messages to conversation
     9. Yield tokens as SSE events
 """

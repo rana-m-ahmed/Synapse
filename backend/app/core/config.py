@@ -35,7 +35,7 @@ class Settings(BaseSettings):
 
     # ── Groq (LLM Provider) ──────────────────────────────────────────────
     GROQ_API_KEY: str
-    GROQ_MODEL_NAME: str = "llama-3.3-70b-versatile"
+    GROQ_MODEL_NAME: str = "openai/gpt-oss-120b"
 
     # ── Embedding Model ──────────────────────────────────────────────────
     EMBEDDING_MODEL_NAME: str = "paraphrase-multilingual-MiniLM-L12-v2"

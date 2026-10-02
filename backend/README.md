@@ -68,7 +68,7 @@ backend/
 |-----------|-----------|
 | Framework | FastAPI + Uvicorn |
 | Database  | Supabase (PostgreSQL + pgvector) |
-| LLM       | Groq API (LLaMA 3.3 70B) |
+| LLM       | Groq API (GPT-OSS 120B) |
 | Embeddings| sentence-transformers (all-MiniLM-L6-v2) |
 | Auth      | Supabase Auth (JWT) |
 | Storage   | Supabase Storage |
