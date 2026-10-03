@@ -216,9 +216,13 @@ export function DemoSection() {
                   <button 
                     type="submit"
                     disabled={isStreaming || !input.trim()}
-                    className="w-10 h-10 rounded-full bg-charcoal-text text-white flex items-center justify-center hover:bg-electric-tangerine transition-colors disabled:opacity-50 disabled:hover:bg-charcoal-text shrink-0"
+                    className="w-10 h-10 rounded-full bg-electric-tangerine text-surface flex items-center justify-center hover:brightness-110 transition-all disabled:opacity-40 shrink-0"
                   >
-                    <span className="material-symbols-outlined text-[18px]">arrow_upward</span>
+                    {isStreaming ? (
+                      <span className="material-symbols-outlined text-[18px] animate-spin">progress_activity</span>
+                    ) : (
+                      <span className="material-symbols-outlined text-[18px]">arrow_upward</span>
+                    )}
                   </button>
                 </form>
               </motion.div>
